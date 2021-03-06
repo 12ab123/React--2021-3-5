@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {Route,Switch} from 'react-router-dom'
-import Login from './pages/Login/Login.jsx'
-import Admin from './pages/Admin/Admin.jsx'
+import Login from './pages/login/login.jsx'
+import Admin from './pages/admin/admin.jsx'
 
 export default class App extends Component{
   render(){
