@@ -1,6 +1,6 @@
 import Counter from '../components/counter'
 import {connect} from 'react-redux'
-import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} from '../redux/action_creators'
+import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} from '../redux/actions/counter_action'
 
 
 //此函数把状态作为参数传递给UI组件(完整)
@@ -32,7 +32,7 @@ import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} 
 
 //最终简写
 export default connect(
-        state=>({count:state}),
+        state=>({count:state.count}),     //这里的state包含着所有的状态
         {increment:createIncrementAction,decrement:createDecrementAction,incrementAsync:createIncrementAsyncAction}
     )(Counter)
 
