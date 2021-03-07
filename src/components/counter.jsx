@@ -25,9 +25,7 @@ export default class Counter extends Component{
 
     incrementAsync=()=>{
         let {value}=this.refs.selectNumber
-        setTimeout(() => {
-        this.props.increment(value*1)
-        }, 1000);
+        this.props.incrementAsync(value*1,1000)
     }
 
     render(){
