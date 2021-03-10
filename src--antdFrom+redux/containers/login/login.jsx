@@ -1,15 +1,20 @@
 import React,{Component} from 'react'
 import {Form,Input,Button} from 'antd';
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
+import {connect} from 'react-redux'
+import {createDemo1Action,createDemo2Action} from '../../redux/action_creators/test_action'
 import './css/login.less'
 import logo from './imgs/logo.png'
 const {Item} = Form
 
-export default class Login extends Component{
 
+
+ class Login extends Component{
+
+  
 
   onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    this.props.demo2('0719')
   };
 
   //密码的验证器---每当在密码输入框输入东西后，都会调用此函数去验证输入是否合法。自定义校验，即：自己写判断
@@ -25,6 +30,10 @@ export default class Login extends Component{
     }else{
       return Promise.resolve()
     }
+  }
+
+  componentDidMount(){
+    console.log(this.props);
   }
 
   render(){
@@ -81,3 +90,11 @@ export default class Login extends Component{
   }
 }
 
+
+export default connect(
+  state=>({test:state.test}),
+  {
+    demo1:createDemo1Action,
+    demo2:createDemo2Action
+  }
+)(Login)
