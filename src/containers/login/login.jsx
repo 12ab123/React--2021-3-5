@@ -9,11 +9,16 @@ import {createSaveUserInfoAction} from '../../redux/action_creators/login_action
 //但文件夹中有index.js文件时,不需要写index.js文件,只需要写文件夹即可
 import {reqLogin} from '../../api/index'      //引入请求文件
 import './css/login.less'
-import logo from './imgs/logo.png'
+import logo from '../../static/img/logo.png'
 const {Item} = Form
 
 
-
+@connect(
+  state=>({isLogin:state.userInfo.isLogin}),
+  {
+    saveUserInfo:createSaveUserInfoAction,
+  }
+)
  class Login extends Component{
 
   //当提交表单判断校验数据
@@ -32,6 +37,7 @@ const {Item} = Form
         //如果状态为0,那么就可以登录,跳转到admin
         this.props.history.replace('/admin')
       }else{
+        console.log(result);
         message.error('用户或密码错误',1)
       }
   
@@ -39,7 +45,6 @@ const {Item} = Form
 	    console.log('Failed:', errorInfo);
 	    message.warn('提交校验失败')
 	  }
-    // console.log(this.formRef);
 	}
 
   //点击表单按钮,发送请求
@@ -97,7 +102,7 @@ const {Item} = Form
     console.log(this.props);
     //如果已经登录了,跳转到admin页面
     if(isLogin){
-      return <Redirect to="/admin"/>
+      return <Redirect to="/admin/home"/>
     }
     return (
       <div className="login">
@@ -154,9 +159,4 @@ const {Item} = Form
 }
 
 
-export default connect(
-  state=>({isLogin:state.userInfo.isLogin}),
-  {
-    saveUserInfo:createSaveUserInfoAction,
-  }
-)(Login)
+export default Login
